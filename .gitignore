@@ -39,6 +39,8 @@ bld/
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+2FA_RFID/dev_notes/.$2FA_RFID.png.bkp
+2FA_RFID/dev_notes/.$2FA_RFID.png.dtmp
 
 
 # Visual Studio 2015/2017 cache/options directory
