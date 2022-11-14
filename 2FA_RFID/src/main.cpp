@@ -11,14 +11,6 @@ SCK = 18
 SDA = 21
 
 */
-
-/*
- * 
- * All the resources for this project: https://www.hackster.io/Aritro
- * Modified by Aritro Mukherjee
- * 
- * 
- */
  
 #include <SPI.h>
 #include <MFRC522.h>

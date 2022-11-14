@@ -2,6 +2,10 @@ Written by Ajae Obaze
 
 # 2FA_RFID  -<br> Development notes
 
+## Todo list
+- Create test server
+- Create test desktop application
+
 ### ESP32 Needs
 - Needs signal from PC to enable reading of RFID tag.
 - ESP32 reads RFID tag UID to be sent to PC via serial or server via network communication
