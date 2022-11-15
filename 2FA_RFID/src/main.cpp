@@ -60,12 +60,10 @@ String ReadRFID()
 {
   String content= "";
 
-  // Using recursion if either of below functions return false.
-
-  // Look card
+  // Check if card present to be scanned
   while (!mfrc522.PICC_IsNewCardPresent()) 
   {
-    Serial.println("Please tap card");
+    Serial.println("Waiting for card");
     delay(2500);
   }
   // Read card uid
@@ -76,7 +74,7 @@ String ReadRFID()
 
   for (byte i = 0; i < mfrc522.uid.size; i++) 
   {
-    content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+    content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : ""));
     content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
   
