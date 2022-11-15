@@ -51,4 +51,7 @@ void loop()
      content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
      content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
+
+  // Delay so card is read multiple times so quickly.
+  delay(2500);
 } 
