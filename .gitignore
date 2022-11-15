@@ -35,7 +35,7 @@ bld/
 
 # Personal ignore
 .pio
-.vscode/*
+.vscode/
 2FA_RFID/dev_notes/.$2FA_RFID.png.bkp
 2FA_RFID/dev_notes/.$2FA_RFID.png.dtmp
 
