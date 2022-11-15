@@ -16,7 +16,6 @@ SDA = 21
 #include <MFRC522.h>
 #include <WiFi.h>
 #include "data.h"
-#include "main.h"
 
 
 // WifI and server variables
@@ -57,31 +56,31 @@ void setup()
   Serial.println();
 }
 
-void ReadRFID()
+String ReadRFID()
 {
-    // Look for new cards
-  if ( ! mfrc522.PICC_IsNewCardPresent()) 
-  {
-    return;
-  }
-  // Select one of the cards
-  if ( ! mfrc522.PICC_ReadCardSerial()) 
-  {
-    return;
-  }
-  //Show UID on serial monitor
-  Serial.print("UID tag :");
   String content= "";
+
+  // Using recursion if either of below functions return false.
+
+  // Look card
+  while (!mfrc522.PICC_IsNewCardPresent()) 
+  {
+    Serial.println("Please tap card");
+    delay(2500);
+  }
+  // Read card uid
+  while (!mfrc522.PICC_ReadCardSerial()) 
+  {
+    return "";
+  }
 
   for (byte i = 0; i < mfrc522.uid.size; i++) 
   {
-     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-     Serial.print(mfrc522.uid.uidByte[i], HEX);
-     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-     content.concat(String(mfrc522.uid.uidByte[i], HEX));
+    content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+    content.concat(String(mfrc522.uid.uidByte[i], HEX));
   }
-
-  Serial.println("");
+  
+  return content;
 }
 
 void loop() 
@@ -96,7 +95,9 @@ void loop()
 
     if(client.available() > 0 ) {
       String data = client.readString();
-      Serial.print(data);
+      if(data == "READ") {
+        client.print(ReadRFID());
+      } 
     }
   }
   // Delay so card is read multiple times so quickly.
