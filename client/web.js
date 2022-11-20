@@ -34,7 +34,7 @@ web.post('/login', (req, res) => {
     }
     else
     {
-        return res.send("Please enter all user details.");
+        return res.redirect('/auth_fail.html');
     }
 })
 
