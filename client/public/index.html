@@ -10,23 +10,40 @@
 <body>
     
     <div class="columns is-centered mt-5">
-        <div class="column is-half">
+        <div class="column is-one-third">
             <div class="card">
                 <div class="card-content">
                     <p class="title">2FA_RFID - Login</p>
-                    <form action="">
+                    <form method="post" action="/login">
                         <label class="label" for="user">Username</label>
-                        <input class="input" type="text" name="user" id="user" placeholder="Username">
+                        <input class="input" type="text" name="user" id="user" placeholder="Username" required="">
                 
                         <label class="label" for="pass">Password</label>
-                        <input class="input" type="password" name="pass" id="pass" placeholder="Username">
+                        <input class="input" type="password" name="pass" id="pass" placeholder="Password" required="">
                 
-                        <button class="button is-info is-fullwidth mt-2" type="submit">Submit</button>
+                        <button id="submit" class="button is-info is-fullwidth mt-2" type="submit">Submit</button>
                     </form>
                 </div>
             </div>
+
+            <div id="notify" style="display: none;" class="notification is-warning mt-3">
+                <button class="delete"></button>
+                Please scan your RFID pass now.
+              </div>
         </div>
     </div>
 
+
+    <script>
+        let btn = document.getElementById("submit");
+        let notify = document.getElementById("notify");
+
+        btn.onclick = function(){
+            if(document.getElementById("user").value.length > 0 && document.getElementById("pass").value.length > 0)
+            {
+                notify.style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
