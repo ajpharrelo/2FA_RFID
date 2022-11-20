@@ -18,17 +18,15 @@ let client = net.createConnection({host: "192.168.0.40", port: 80}, () => {
 // checkID returning false when using data sent from ESP32 
 // but returns true when using literal value
 
-console.log(checkID("f7b1b2fd"));
 client.on('data', (data) => {
-    console.log(checkID(data.toString()));
-    // if(checkID(data.toString()))
-    // {
-    //     console.log("Authorised UID scanned");
-    // }
-    // else
-    // {
-    //     console.log("Unauthorised UID scanned");
-    // }
+    if(checkID(data.toString()) == true)
+    {
+        console.log("Authorised UID scanned");
+    }
+    else
+    {
+        console.log("Unauthorised UID scanned");
+    }
 })
 
 client.on('error', (err) => {

@@ -26,8 +26,6 @@ int status = WL_IDLE_STATUS;
 WiFiServer server(80);
 bool clientConnected = false;
 
-
- 
 #define SS_PIN 5
 #define RST_PIN 27
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
@@ -35,6 +33,7 @@ MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
 void setup() 
 {
   Serial.begin(9600);   // Initiate a serial communication
+  pinMode(21, OUTPUT);
 
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -52,7 +51,7 @@ void setup()
 
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
-  Serial.println("Approximate your card to the reader...");
+  Serial.println("Awaiting commands...");
   Serial.println();
 }
 
@@ -63,8 +62,10 @@ String ReadRFID()
   // Check if card present to be scanned
   while (!mfrc522.PICC_IsNewCardPresent()) 
   {
-    Serial.println("Waiting for card");
-    delay(2500);
+    digitalWrite(21, HIGH);
+    delay(500);
+    digitalWrite(21, LOW);
+    delay(500);
   }
   // Read card uid
   while (!mfrc522.PICC_ReadCardSerial()) 
