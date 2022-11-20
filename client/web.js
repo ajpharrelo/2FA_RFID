@@ -3,6 +3,11 @@ const client = require('./api/client')
 const user = require('./api/user')
 const web = express();
 
+//ESP32 Setup
+const ESP_SERVER_ADDR = "192.168.0.40";
+const ESP_PORT = 80;
+
+// Static files
 web.use(express.static('public'))
 web.use(express.static('./node_modules/bulma/'))
 
@@ -16,7 +21,7 @@ web.post('/login', (req, res) => {
     {
         if(user.checkUser(req.body.user, req.body.pass) == true)
         {
-            client.GetRFID("192.168.0.40", 80, (rfid) => {
+            client.GetRFID(ESP_SERVER_ADDR, ESP_PORT, (rfid) => {
                 if(user.checkID(rfid, req.body.user, req.body.pass) == true)
                 {
                     return res.redirect('/home.html')

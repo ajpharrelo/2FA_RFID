@@ -58,7 +58,7 @@ void setup()
 String ReadRFID()
 {
   String content= "";
-
+  int i = 0;
   // Check if card present to be scanned
   while (!mfrc522.PICC_IsNewCardPresent()) 
   {
@@ -66,6 +66,16 @@ String ReadRFID()
     delay(500);
     digitalWrite(21, LOW);
     delay(500);
+
+    // If reader has been waiting for 6-7 seconds send NULL to client.
+    if(i < 6)
+    {
+      i++;
+    }
+    else
+    {
+      return "NULL";
+    }
   }
   // Read card uid
   while (!mfrc522.PICC_ReadCardSerial()) 
