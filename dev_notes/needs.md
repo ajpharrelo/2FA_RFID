@@ -22,4 +22,4 @@ Written by Ajae Obaze
 - Timeout max
 
 ### Data flow diagram of communication process
-![Diagram](https://raw.githubusercontent.com/ajpharrelo/2FA_RFID/master/2FA_RFID/dev_notes/2FA_RFID.png)
+![Diagram](https://raw.githubusercontent.com/ajpharrelo/2FA_RFID/master/dev_notes/2FA_RFID.png)
