@@ -1,5 +1,6 @@
 const express = require('express');
 const client = require('./api/client')
+const user = require('./api/user')
 const web = express();
 
 web.use(express.static('public'))
@@ -13,9 +14,23 @@ web.post('/login', (req, res) => {
 
     if(req.body.user && req.body.pass)
     {
-        client.GetRFID("192.168.0.40", 80, (rfid) => {
-           return res.send(rfid);
-        })
+        if(user.checkUser(req.body.user, req.body.pass) == true)
+        {
+            client.GetRFID("192.168.0.40", 80, (rfid) => {
+                if(user.checkID(rfid, req.body.user, req.body.pass) == true)
+                {
+                    return res.redirect('/home.html')
+                }
+                else
+                {
+                    return res.redirect('/rfid_fail.html');
+                }
+             })
+        }
+        else
+        {
+            return res.redirect('/auth_fail.html');
+        }
     }
     else
     {

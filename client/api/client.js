@@ -1,15 +1,6 @@
 const net = require('net')
 const list = require('../users.json')
 
-function checkID(uid)
-{
-    const found = list.find(x => x.uid === uid);
-    if(found)
-        return true;
-
-    return false
-}
-
 function GetRFID(serverAddr, serverPort, callback)
 {
     let client = net.createConnection({host: serverAddr, port: serverPort, keepAlive: true}, () => {
@@ -22,6 +13,5 @@ function GetRFID(serverAddr, serverPort, callback)
 }
 
 module.exports = {
-    checkID,
     GetRFID
 }
