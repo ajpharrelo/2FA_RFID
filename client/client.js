@@ -1,5 +1,5 @@
 const net = require('net')
-const list = require('./uid.json')
+const list = require('./users.json')
 
 function checkID(uid)
 {
@@ -10,21 +10,26 @@ function checkID(uid)
     return false
 }
 
-let client = net.createConnection({host: "192.168.0.40", port: 80}, () => {
-    client.write("READ");
-});
+// let client = net.createConnection({host: "192.168.0.40", port: 80, keepAlive: true}, () => {
+//     client.write("READ");
 
-client.on('data', (data) => {
-    if(checkID(data.toString()) == true)
-    {
-        console.log("Authorised UID scanned");
-    }
-    else
-    {
-        console.log("Unauthorised UID scanned");
-    }
-})
+//     client.on('data', (data) => {
+//         if(checkID(data.toString()) == true)
+//         {
+//             console.log("Authorised UID scanned");
+//         }
+//         else
+//         {
+//             console.log("Unauthorised UID scanned");
+//         }
+//     })
+    
+//     client.on('error', (err) => {
+//         console.log("Server error: " + err.message);
+//     })
+    
+//     client.on('end', () => {
+//         console.log("Disconnected from ESP32");
+//     })
+// });
 
-client.on('error', (err) => {
-    console.log("Server error: " + err.message);
-})
