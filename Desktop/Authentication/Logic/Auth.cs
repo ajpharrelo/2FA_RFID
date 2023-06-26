@@ -12,11 +12,7 @@ namespace Authentication.Logic
             _port.BaudRate = baud;
         }
 
-        public static string[] GetPorts()
-        {
-            return SerialPort.GetPortNames();
-        }
-
+        public static string[] GetPorts(){ return SerialPort.GetPortNames(); }
         public void Connect()
         {
             try
@@ -29,7 +25,6 @@ namespace Authentication.Logic
                 isValid = false;
             }
         }
-
         public void Disconnect()
         {
             if(_port.IsOpen)
@@ -42,7 +37,6 @@ namespace Authentication.Logic
                 throw new Exception("Not currently connected to port");
             }
         }
-
         public long GetAuthID()
         {
             if (isValid)
@@ -70,7 +64,6 @@ namespace Authentication.Logic
                 throw new Exception("Could not verify connection to port");
             }
         }
-
         public bool IsValid()
         {
             return isValid;
