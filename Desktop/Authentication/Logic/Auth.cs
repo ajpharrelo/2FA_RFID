@@ -5,11 +5,16 @@ namespace Authentication.Logic
     public class Auth
     {
         private SerialPort _port = new SerialPort();
-        private bool portValid = false;
+        private bool isValid = false;
         public Auth(string portName, int baud)
         {
             _port.PortName = portName;
             _port.BaudRate = baud;
+        }
+
+        public static string[] GetPorts()
+        {
+            return SerialPort.GetPortNames();
         }
 
         public void Connect()
@@ -17,11 +22,11 @@ namespace Authentication.Logic
             try
             {
                 _port.Open();
-                portValid = true;
+                isValid = true;
             }
             catch (Exception)
             {
-                portValid = false;
+                isValid = false;
             }
         }
 
@@ -30,7 +35,7 @@ namespace Authentication.Logic
             if(_port.IsOpen)
             {
                 _port.Close();
-                portValid = false;
+                isValid = false;
             }
             else
             {
@@ -40,17 +45,24 @@ namespace Authentication.Logic
 
         public long GetAuthID()
         {
-            if (portValid)
+            if (isValid)
             {
-                long id;
-                try
+                if(_port.BytesToRead > 0)
                 {
-                    id = long.Parse(_port.ReadLine());
-                    return id;
+                    long id;
+                    try
+                    {
+                        id = long.Parse(_port.ReadLine());
+                        return id;
+                    }
+                    catch (Exception)
+                    {
+                        throw new Exception("Data sent from port invalid");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-                    throw new Exception("Data sent from port invalid");
+                    throw new Exception("No data received from port");
                 }
             }
             else
@@ -59,9 +71,9 @@ namespace Authentication.Logic
             }
         }
 
-        public bool PortValid()
+        public bool IsValid()
         {
-            return portValid;
+            return isValid;
         }
     }
 }
