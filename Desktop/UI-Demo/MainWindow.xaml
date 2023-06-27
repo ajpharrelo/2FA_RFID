@@ -5,9 +5,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI_Demo"
+        ExtendsContentIntoTitleBar="True"
         mc:Ignorable="d"
-        Title="UI Demo" Height="450" Width="800">
+        Title="UI Demo" Height="400" Width="450">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
         
+        <ui:TitleBar Title="Application Login" Grid.Row="0" ShowMaximize="False" />
+
+        <StackPanel Margin="10" Grid.Row="1">
+            <Label Margin="0,5" Content="Username"/>
+            <ui:TextBox PlaceholderText="Username" x:Name="txtuser"/>
+        </StackPanel>
+
+        <StackPanel Margin="10" Grid.Row="2">
+            <Label Margin="0,5" Content="Password"/>
+            <ui:PasswordBox PlaceholderText="Password" x:Name="txtPass"/>
+        </StackPanel>
+
+        <ui:Button Margin="20,10" Height="40" HorizontalAlignment="Stretch" Grid.Row="3" Content="Login" Appearance="Primary"
+                   Click="Button_Click"/>
+
+        
+        <!--Status cards-->
+        <ui:Card Margin="15" Grid.Row="4" Visibility="Hidden">
+            <StackPanel x:Name="scanWait" >
+                <TextBlock Margin="0,5" TextAlignment="Center" FontSize="14" Text="Please Scan your ID Card"/>
+            </StackPanel>
+        </ui:Card>
+
+        <ui:Card Margin="15" Grid.Row="4" Visibility="Hidden" Background="#b12828">
+            <StackPanel x:Name="scanBad">
+                <TextBlock Margin="0,5" TextAlignment="Center" FontSize="14" Text="Authentication failure (Unknown Card)"/>
+            </StackPanel>
+        </ui:Card>
+
+        <ui:Card Margin="15" Grid.Row="4" Visibility="Hidden" Background="#75a026">
+            <StackPanel x:Name="scanGood">
+                <TextBlock Margin="0,5" TextAlignment="Center" FontSize="14" Text="Authentication success"/>
+            </StackPanel>
+        </ui:Card>
     </Grid>
 </ui:UiWindow>
