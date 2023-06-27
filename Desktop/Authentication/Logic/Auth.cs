@@ -15,6 +15,9 @@ namespace Authentication.Logic
         public static string[] GetPorts(){ return SerialPort.GetPortNames(); }
         public void Connect()
         {
+            if (_port.IsOpen) // If already connected do not connect again
+                return;
+
             try
             {
                 _port.Open();
