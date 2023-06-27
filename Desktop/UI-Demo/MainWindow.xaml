@@ -34,20 +34,20 @@
 
         
         <!--Status cards-->
-        <ui:Card Margin="15" Grid.Row="4" Visibility="Hidden">
-            <StackPanel x:Name="scanWait" >
+        <ui:Card Margin="15" Grid.Row="4" x:Name="scanWait" Visibility="Hidden">
+            <StackPanel>
                 <TextBlock Margin="0,5" TextAlignment="Center" FontSize="14" Text="Please Scan your ID Card"/>
             </StackPanel>
         </ui:Card>
 
-        <ui:Card Margin="15" Grid.Row="4" Visibility="Hidden" Background="#b12828">
-            <StackPanel x:Name="scanBad">
+        <ui:Card Margin="15" Grid.Row="4" x:Name="scanBad" Visibility="Hidden" Background="#b12828">
+            <StackPanel>
                 <TextBlock Margin="0,5" TextAlignment="Center" FontSize="14" Text="Authentication failure (Unknown Card)"/>
             </StackPanel>
         </ui:Card>
 
-        <ui:Card Margin="15" Grid.Row="4" Visibility="Hidden" Background="#75a026">
-            <StackPanel x:Name="scanGood">
+        <ui:Card Margin="15" Grid.Row="4" x:Name="scanGood" Visibility="Hidden" Background="#75a026">
+            <StackPanel>
                 <TextBlock Margin="0,5" TextAlignment="Center" FontSize="14" Text="Authentication success"/>
             </StackPanel>
         </ui:Card>
